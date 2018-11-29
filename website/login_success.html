@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Railway booking system</title>
+	<meta charset="utf-8">
+    <style> body {padding: 0; margin: 0;} </style>
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	  <link rel="stylesheet" href="/resources/demos/style.css">
+	  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  <script>
+	  $( function() 
+	  {
+	    $( "#datepicker" ).datepicker();
+	  } );
+	</script>
+	<script src = "https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script>
+      var socket = io.connect('http://127.0.0.1:3000/');
+      var data_req;
+      socket.on('broadcast',function(data) {
+      	data_req = data;
+        //var elem=document.getElementById('text_element');
+    	//name: 'a',
+		// password: 'asd',
+		// bank_balance: 100,
+		// from_place: null,
+		// to_place
+        //elem.innerHTML = (data.name+"-"+data.bank_balance+"-"+data.from_place+"-"+data.to_place);
+      });
+      function passenger_add(){
+      	var input = document.createElement("input");
+		input.type = "text";
+		input.name = "passenger";
+		input.placeholder = "passenger name"
+		var passenger_list = document.getElementById('passenger_list');
+		passenger_list.appendChild(input);
+		input = document.createElement("input");
+		input.type = "text";
+		input.name = "age";
+		input.placeholder = "age";
+		passenger_list.appendChild(input);
+		input = document.createElement("br");
+		passenger_list.appendChild(input);
+      };
+      function check_balance()
+      {
+      	var temp = document.getElementById('ticket_data');
+      	if(temp <= data_req.bank_balance){
+      		alert("You can book your ticket!!");
+      	}
+      	else{
+      		alert("Not enough money!!");
+      		window.location.href = "https://127.0.0.1/login_success.html";
+      	}
+      }
+    </script>
+    <script src="login_success.js"></script>
+
+</head>
+<body>
+<style type="text/css">
+	
+	.vertical_line {
+    	border-left: 1px solid black;
+    	height:100%;
+    	position: absolute;
+    	left: 50%;
+    	margin-left: -3px;
+    	top: 0;
+	}
+	table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+	}
+
+	td, th {
+	    border: 1px solid #dddddd;
+	    text-align: left;
+	    padding: 8px;
+	}
+
+	tr:nth-child(even) {
+	    background-color: #dddddd;
+	}
+</style>
+<div class="row">
+	<div class="col-sm-3 col-md-3 col-lg-3">
+		
+	</div>
+    <div class="col-sm-6 col-md-6 col-lg-6" style="background-color:white;text-align: center;">
+    	<form class="form-horizontal" action="http://127.0.0.1:3000/index.html" style="">
+      	<h1 style="text-align: left;">Plan Journey</h1>
+      	<button type="submit" class="btn btn-default" style="text-align: right;">LOG OUT</button>
+      </form>
+    	<form style="text-align: right;" method="GET">
+    	<button formaction="http://127.0.0.1:3000/prev_bookings">Previous bookings</button></form>
+    	<div class="col-sm-9 col-md-9 col-lg-9 form-group" style="text-align:left;">
+    		<form action="http://127.0.0.1:3000/book_ticket" class="form-horizontal">
+				date:<input type="text" id="datepicker" placeholder="date mm/dd/yy" name="	datepicker">
+				<br>
+			    From: <input type="text" name="from_place" id="from_place"><br>
+  				To  : <input type="text" name="to_place" id="to_place"><br>
+				Select trains: <select id="train_list" name = "train_vals">
+				<option></option>
+				</select>
+  				<div id="passenger_list">
+  					<input type="text" name="passenger" placeholder="passenger name">
+  					<input type="text" name="age" placeholder="age">
+  				</div>
+  				<br>
+  				Acc no.<input type="text" name="account_no" placeholder="account no"><br>
+  				Ticket fare:<input type="text" name="amount" placeholder="amount" id="ticket_data"><br>
+  				<button type="submit">Book tickets</button><br>
+	    	</form>
+    	</div>
+    	<div class="col-sm-3 col-md-3 col-lg-3">
+    		<br><br><br>
+    		<button id="get_trains" onclick="set_trains()">Get trains</button><br><br>
+    		<button id="add_passenger" onclick="passenger_add()">Add Passenger</button><br><br>
+    		<button id="check_balance" onclick="check_balance()">Check Balance</button>
+    	</div>
+    	
+    </div>
+    <div class="col-sm-3 col-md-3 col-lg-3">
+		
+	</div>
+    
+</div>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Railway booking system</title>
+	<meta charset="utf-8">
+    <style> body {padding: 0; margin: 0;} </style>
+    <script src="p5.min.js"></script>
+    <script src="addons/p5.dom.js"></script>
+    <script src="addons/p5.sound.min.js"></script>
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<style type="text/css">
+	
+	.vertical_line {
+    	border-left: 1px solid black;
+    	height:100%;
+    	position: absolute;
+    	left: 50%;
+    	margin-left: -3px;
+    	top: 0;
+	}
+</style>
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6" style="background-color:white;text-align: center;">
+      <h3>LOGIN</h3>
+      <br>
+      <br>
+      <br>
+        <form action="http://127.0.0.1:3000/login_get" method="GET">
+		  User ID:<br>
+		  <input type="text" name="userid" id="userid1" placeholder="user123">
+		  <br>
+		  Password:<br>
+		  <input type="password" name="password" id="password1">
+		  <br><br>
+		  <input type="submit" value="LOGIN">
+		</form> 
+    </div>
+    <div class="vertical_line">
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6" style="background-color:white;text-align: center;">
+      <h3>SIGN UP</h3>
+      <br>
+      <br>
+      <br>
+      <form action="http://127.0.0.1:3000/signup_get" method="GET">
+		  User ID:<br>
+		  <input type="text" name="userid" id="userid2" placeholder="user123">
+		  <br>
+		  Password:<br>
+		  <input type="password" name="password" id="password2">
+		  <br>
+		  Confirm Password:<br>
+		  <input type="password" name="con_password" id="con_password">
+		  <br>
+		  Aadhar Number:<br>
+		  <input type="text" name="aadhar" id="aadhar" placeholder="1234-1421-1231-1233">
+		  <br>
+		  Bank Balance:<br>
+		  <input type="text" name="bank_balance" id="bank_balance" placeholder="100">
+		  <br><br>
+		  <input type="submit" value="SIGN UP">
+		  <br><br>
+		</form> 
+    </div>
+  </div>
+
+</body>
+</html>
